@@ -1,0 +1,114 @@
+/* Gaya umum */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.navbar {
+    background-color: #185635; /* Warna hijau */
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Memungkinkan konten membungkus */
+}
+
+.navbar .logo img {
+    height: 150px; /* Ukuran logo lebih besar */
+    margin-left: 30px; /* Menggeser logo ke kanan */
+}
+
+.nav-links {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-link {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0 1.5rem;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #d1fae5; /* Warna saat hover */
+}
+
+/* Gaya CSS Dropdown */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 90px; /* Lebar dropdown lebih kecil */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    white-space: nowrap; /* Mencegah teks terpecah menjadi dua baris */
+}
+
+.user-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.user-dropdown .dropdown-content a {
+    color: black;
+    padding: 6px 8px; /* Padding lebih kecil */
+    text-decoration: none;
+    display: block;
+    overflow: hidden; /* Menyembunyikan overflow jika ada */
+    text-overflow: ellipsis; /* Menambahkan ellipsis jika teks terlalu panjang */
+}
+
+.user-dropdown .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Ikon dropdown */
+.user-name i {
+    margin-left: 5px;
+}
+
+/* Menengahkan Dropdown */
+.user-dropdown .dropdown-content {
+    left: 50%;
+    transform: translateX(-50%); /* Menengahkan secara horizontal */
+}
+
+/* Media Query untuk Responsif */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Susun vertikal */
+        align-items: flex-start; /* Rata kiri */
+    }
+
+    .nav-links {
+        flex-direction: column; /* Susun link secara vertikal */
+        align-items: flex-start; /* Rata kiri */
+        width: 100%; /* Lebar penuh */
+    }
+
+    .nav-link {
+        padding: 10px 0; /* Padding vertikal untuk link */
+        text-align: left; /* Rata kiri */
+        width: 100%; /* Lebar penuh untuk link */
+    }
+
+    .user-dropdown {
+        width: 100%; /* Lebar penuh untuk dropdown */
+        text-align: left; /* Rata kiri */
+        margin-top: 10px; /* Spasi tambahan di atas dropdown */
+    }
+
+    .user-name {
+        width: 100%; /* Lebar penuh untuk nama pengguna */
+        padding: 10px 12px; /* Padding untuk pengguna */
+        cursor: pointer; /* Tampilkan kursor pointer */
+    }
+}

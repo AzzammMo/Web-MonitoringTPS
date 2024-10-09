@@ -1,0 +1,96 @@
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background: #009579;
+    display: flex; /* Gunakan flex untuk memusatkan konten */
+    justify-content: center; /* Pusatkan secara horizontal */
+    align-items: center; /* Pusatkan secara vertikal */
+}
+
+.container {
+    max-width: 400px; /* Lebar maksimum kontainer */
+    width: 90%; /* Responsif untuk tampilan mobile */
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 2rem; /* Tambahkan padding untuk memberikan ruang lebih */
+    margin: 20px; /* Margin untuk memberi ruang di sekitar kontainer */
+}
+
+.registration {
+    display: flex; /* Flex untuk mengatur tata letak */
+    flex-direction: column; /* Vertikal */
+    align-items: center; /* Pusatkan konten secara horizontal */
+}
+
+.registration img {
+    display: block;
+    margin: 0rem; /* Spasi di atas dan bawah gambar */
+    max-width: 60%; /* Lebar gambar agar lebih proporsional */
+    height: auto; /* Pertahankan rasio aspek */
+}
+
+.header {
+    font-size: 1.8rem; /* Ukuran font header */
+    font-weight: 500;
+    margin: 1rem 0; /* Margin atas dan bawah untuk jarak dari gambar */
+}
+
+.registration input,
+.registration select {
+    height: 50px; /* Tinggi input */
+    width: 100%;
+    padding: 0 10px; /* Padding untuk input */
+    font-size: 16px; /* Ukuran font input */
+    margin-bottom: 1rem; /* Margin bawah */
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.registration input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.signup {
+    font-size: 16px; /* Ukuran font */
+    text-align: center;
+}
+
+.signup a {
+    color: #009579;
+    text-decoration: none;
+}
+
+.signup a:hover {
+    text-decoration: underline;
+}
+
+.button {
+    color: #fff;
+    background: #28a745; /* Warna hijau */
+    font-size: 1rem; /* Ukuran font tombol */
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 1rem; /* Margin atas */
+    cursor: pointer;
+    transition: background-color 0.4s, transform 0.2s;
+    height: 50px; /* Tinggi tombol */
+    border: none; /* Hilangkan border default */
+    border-radius: 6px; /* Sesuaikan dengan input */
+    width: 100%; /* Agar tombol memenuhi lebar kontainer */
+}
+
+.button:hover {
+    background: #218838; /* Warna hijau lebih gelap saat hover */
+    transform: scale(1.05); /* Efek zoom saat hover */
+}

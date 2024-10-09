@@ -1,0 +1,155 @@
+/* Styles for the dashboard */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7fafc;
+    margin: 0;
+    padding: 0;
+}
+
+.map-container {
+    
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Batasi lebar peta */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 10px 15px; /* Ubah padding agar tabel lebih kecil */
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background-color: #4a5568;
+    color: white;
+}
+
+tr:hover {
+    background-color: #edf2f7;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+.welcome-message {
+    font-weight: bold;
+    color: #38a169; /* Warna hijau */
+}
+/* app.css */
+
+#route-info {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 500px;
+}
+
+#route-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+#route-info p {
+    margin: 5px 0;
+}
+.leaflet-control-container .leaflet-routing-container {
+    display: none; /* Menyembunyikan kontrol rute */
+}
+
+.whatsapp-button {
+    display: flex;                   /* Mengatur elemen menjadi fleksibel */
+    align-items: center;            /* Menyusun item secara vertikal di tengah */
+    background-color: #25D366;      /* Warna latar belakang hijau */
+    border: none;                   /* Tanpa border */
+    border-radius: 5px;            /* Sudut membulat */
+    padding: 10px 15px;            /* Padding dalam tombol (atas/bawah, kiri/kanan) */
+    cursor: pointer;                /* Kursor pointer saat hover */
+    transition: background-color 0.3s; /* Transisi warna latar belakang */
+    position: fixed;                /* Memperbaiki posisi tombol */
+    bottom: 20px;                   /* Jarak dari bagian bawah */
+    right: 20px;                    /* Jarak dari bagian kanan */
+    z-index: 1000;                 /* Agar tombol di atas elemen lain */
+}
+
+.whatsapp-button:hover {
+    background-color: #1e8c4a;      /* Warna latar belakang saat hover (lebih gelap) */
+}
+
+.whatsapp-button i,                 /* Menargetkan elemen ikon */
+.whatsapp-button span {              /* Menargetkan elemen span untuk teks */
+    color: white;                   /* Warna teks dan ikon menjadi putih */
+}
+
+.whatsapp-button span {              /* Menargetkan elemen span untuk teks */
+    font-size: 16px;                /* Ukuran font untuk teks */
+    margin-left: 10px;              /* Margin kiri untuk spasi antara ikon dan teks */
+}
+
+
+/* Gaya untuk form isian WhatsApp */
+#whatsapp-form {
+    display: none; /* Awalnya tersembunyi */
+    position: fixed;
+    bottom: 80px; /* Jarak dari bawah */
+    right: 20px;
+    background-color: #fff; /* Warna latar belakang putih */
+    border-radius: 10px; /* Border radius untuk sudut melengkung */
+    padding: 10px; /* Mengurangi padding untuk ukuran lebih kecil */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 250px; /* Mengatur lebar form agar lebih kecil */
+}
+
+#whatsapp-form input {
+    margin-bottom: 10px;
+    border: none; /* Menghapus border */
+    border-radius: 5px; /* Radius sudut input */
+    padding: 5px; /* Padding dalam input */
+    width: calc(100% - 12px); /* Lebar input */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk efek visual */
+}
+
+#whatsapp-form button {
+    background-color: #28a745; /* Hijau untuk tombol kirim */
+    color: white;
+    border: none; /* Menghapus border */
+    padding: 8px; /* Mengurangi padding untuk ukuran lebih kecil */
+    border-radius: 5px; /* Radius sudut tombol */
+    cursor: pointer; /* Kursor pointer saat hover */
+    width: 100%; /* Lebar tombol 100% */
+}
+
+#whatsapp-form button:hover {
+    background-color: #20b958; /* Warna lebih gelap saat hover */
+}
+/* Gaya tombol dengan warna abu-abu dan teks putih */
+.view-button {
+    background-color: #a0a0a0; /* Warna abu-abu */
+    color: white;              /* Warna teks putih */
+    padding: 10px 20px;        /* Jarak di dalam tombol */
+    border-radius: 5px;        /* Sudut membulat */
+    border: none;              /* Tidak ada border */
+    cursor: pointer;           /* Ganti kursor menjadi pointer */
+    display: block;            /* Tampilkan tombol sebagai blok */
+    width: 100%;               /* Lebar penuh dari kontainer */
+    text-align: center;        /* Teks berada di tengah */
+}
+
+/* Gaya tombol saat di-hover */
+.view-button:hover {
+    background-color: #888888; /* Warna abu-abu yang lebih gelap saat hover */
+}

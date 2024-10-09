@@ -1,0 +1,117 @@
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background: #009579;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 350px; /* Mengurangi lebar kontainer */
+    width: 90%; /* Lebar kontainer lebih responsif */
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem; /* Menambahkan padding untuk kontainer */
+}
+
+.form {
+    padding: 0; /* Menghilangkan padding di dalam form */
+}
+
+.form header {
+    font-size: 1.6rem; /* Mengurangi ukuran font header */
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 0.8rem; /* Mengurangi margin bawah */
+}
+
+.login-image {
+    display: block;
+    margin: 0 auto 1rem; /* Center the image and add space below */
+    max-width: 40%; /* Mengatur lebar maksimum gambar lebih kecil */
+    height: auto; /* Pertahankan rasio aspek */
+}
+
+.form input {
+    height: 50px; /* Mengurangi tinggi input */
+    width: 100%;
+    padding: 0 10px; /* Mengurangi padding */
+    font-size: 16px; /* Mengurangi ukuran font */
+    margin-bottom: 1rem; /* Mengurangi margin bawah */
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+}
+
+.form input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form a {
+    font-size: 14px; /* Mengurangi ukuran font link */
+    color: #009579;
+    text-decoration: none;
+}
+
+.form a:hover {
+    text-decoration: underline;
+}
+
+/* Styling untuk tombol Login dan Register */
+.button {
+    color: #fff;
+    background: #28a745; /* Warna hijau */
+    font-size: 1rem; /* Mengurangi ukuran font tombol */
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 1rem; /* Mengurangi margin atas */
+    cursor: pointer;
+    transition: background-color 0.4s, transform 0.2s;
+    height: 50px; /* Sesuaikan tinggi tombol */
+    border: none; /* Hilangkan border default */
+    border-radius: 6px; /* Sesuaikan dengan input */
+    width: 100%; /* Agar tombol memenuhi lebar kontainer */
+}
+
+.button:hover {
+    background: #218838; /* Warna hijau lebih gelap saat hover */
+    transform: scale(1.05); /* Efek zoom saat hover */
+}
+
+.signup {
+    font-size: 15px; /* Mengurangi ukuran font untuk signup */
+    text-align: center;
+}
+
+.signup label {
+    color: #009579;
+    cursor: pointer;
+}
+
+.signup label:hover {
+    text-decoration: underline;
+}
+.input-error {
+  color: red; /* Warna merah untuk pesan kesalahan */
+  font-size: 14px; /* Ukuran font */
+  margin-top: 0.2rem; /* Spasi di atas pesan */
+}
+
+.status-message {
+    color: green; /* Mengatur warna teks menjadi hijau */
+    margin-bottom: 1rem; /* Jarak bawah */
+    text-align: center; /* Pusatkan teks */
+}
