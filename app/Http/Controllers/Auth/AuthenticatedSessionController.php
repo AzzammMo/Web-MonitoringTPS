@@ -24,14 +24,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        // Coba autentikasi pengguna
+
         if (Auth::attempt($request->only('email', 'password'))) {
-            // Regenerasi session setelah login berhasil
+
             $request->session()->regenerate();
 
             session()->flash('loginstatus', 'Login berhasil!');
 
-            // Arahkan pengguna ke dashboard sesuai dengan perannya
             $user = auth()->user();
             if ($user->role === 'admin') {
                 return redirect()->route('dashboard.admin');

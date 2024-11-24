@@ -1,25 +1,47 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="custom-container">
-                <div class="p-6 text-gray-900">
-                    @auth
-                        <div style="font-size: 1.2rem;">
-                            {{ __('Selamat datang, ') }}
-                            <span class="welcome-message font-bold uppercase">{{ Auth::user()->name }}</span>
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="container">
+            <div class="p-6 text-gray-900">
+                <div class="flex justify-between items-center">
+                    <div class="flex-1 text-left">
+                        @auth
+                            <div style="font-size: 1.6rem; font-weight: bold;">
+                                {{ __('Selamat datang , ') }}
+                                <span class="welcome-message text-uppercase">
+                                    {{ Auth::user()->name }}
+                                </span>
+                            </div>
+                        @else
+                            <div>{{ __("You're not logged in!") }}</div>
+                        @endauth
+                    </div>
+                    <div class="weather-location-container">
+                        <!-- Jam Realtime -->
+                        <div id="current-time" class="info-item">
+                            <i class="fa fa-clock"></i>
+                            <span id="time"></span>
                         </div>
-                    @else
-                        <div>{{ __("You're not logged in!") }}</div>
-                    @endauth
+                        <!-- Cuaca Terkini -->
+                        <div id="weather-info" class="info-item">
+                            <span id="weather-icon"></span>
+                            <span id="weather"></span>
+                        </div>
+                        <!--Lokasi -->
+                        <div id="location" class="info-item">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <span id="location-name"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Map Container -->
-    <div class="map-container mx-auto max-w-2xl">
+    <div class="map-container mx-auto max-w-2xl" style="margin-top: 30px;">
         <div id="map" style="height: 400px; width: 100%;"></div>
     </div>
+
 
     <!-- Route Info Container -->
     <div id="route-info"
@@ -95,6 +117,7 @@
             </table>
             <div id="no-data" class="py-3 text-center border border-gray-200 rounded hidden">Data TPS tidak ditemukan
             </div>
+
         </div>
     </div>
 
@@ -343,7 +366,63 @@
 
                 // Hide loading indication after filtering is done
                 document.getElementById('loading').classList.add('hidden');
-            }, 500); // 500ms delay to simulate loading
+            }, 500); 
         }
+        // Fungsi untuk update waktu real-time
+        function updateTime() {
+            const timeElement = document.getElementById('time');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Fungsi untuk mendapatkan cuaca berdasarkan lokasi pengguna
+        function getWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const apiKey = '344abe5a4f56636f35a541a3b0a74554';
+                    const weatherUrl =
+                        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+                    fetch(weatherUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            const weatherElement = document.getElementById('weather');
+                            const weatherIconElement = document.getElementById('weather-icon');
+                            const locationElement = document.getElementById(
+                                'location-name'); 
+                            const temperature = data.main.temp;
+                            const weatherDescription = data.weather[0].description;
+                            const weatherIcon = data.weather[0].icon; // Mendapatkan nama ikon cuaca
+                            const locationName = data.name; // Mendapatkan nama lokasi (kota)
+
+                            // Menampilkan nama lokasi (kota)
+                            locationElement.textContent = `${locationName}`;
+
+                            // Menampilkan cuaca dan ikon
+                            weatherElement.textContent = `${temperature}°C, ${weatherDescription}`;
+                            weatherIconElement.innerHTML =
+                                `<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="${weatherDescription}" />`; 
+                        })
+                        .catch(error => {
+                            console.error('Error fetching weather data:', error);
+                            document.getElementById('weather').textContent = 'Tidak dapat memuat cuaca';
+                        });
+                }, function() {
+                    console.error("Geolocation not allowed");
+                    document.getElementById('weather').textContent = 'Lokasi tidak ditemukan';
+                });
+            } else {
+                console.error("Geolocation is not supported by this browser.");
+                document.getElementById('weather').textContent = 'Lokasi tidak ditemukan';
+            }
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+        getWeather();
     </script>
 </x-app-layout>

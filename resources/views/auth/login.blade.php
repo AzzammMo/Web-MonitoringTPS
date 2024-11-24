@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="{{ asset('css/styleLogin.css') }}">
     <style>
         .status-message {
-            color: green; /* Mengatur warna teks menjadi hijau */
-            margin-bottom: 1rem; /* Jarak bawah */
-            text-align: center; /* Pusatkan teks */
+            color: green; 
+            margin-bottom: 1rem; 
+            text-align: center; 
         }
     </style>
 </head>
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="login form">
             <header>Masuk Akun</header>
-            <img src="{{ asset('/image/iconauth.png') }}" alt="" class="login-image">
+            <img src="{{ asset('/imageAuth/log_back.png') }}" alt="" class="login-image">
 
             @if (session('status'))
                 <div class="status-message" id="status-message">
@@ -51,12 +51,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 title: 'Sukses!',
-                text: document.getElementById('status-message').innerText,
+                text: '{{ session('status') }}', 
                 icon: 'success',
                 confirmButtonText: 'OK'
             });
         });
     </script>
-    @endif
+@endif
 </body>
 </html>

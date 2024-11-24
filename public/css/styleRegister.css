@@ -36,7 +36,7 @@ body {
 .registration img {
     display: block;
     margin: 0rem; /* Spasi di atas dan bawah gambar */
-    max-width: 60%; /* Lebar gambar agar lebih proporsional */
+    max-width: 50%; /* Lebar gambar agar lebih proporsional */
     height: auto; /* Pertahankan rasio aspek */
 }
 

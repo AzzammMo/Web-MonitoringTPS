@@ -1,18 +1,37 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="container">
-                <div class="p-6 text-gray-900">
-                    @auth
-                        <div style="font-size: 1.2rem;"> <!-- Ukuran font lebih besar -->
-                            {{ __('Selamat datang Admin, ') }}
-                            <span class="welcome-message font-bold uppercase"
-                                style="font-size: 1.rem;">{{ Auth::user()->name }}</span>
-                            <!-- Ukuran font lebih besar untuk nama -->
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="container">
+            <div class="p-6 text-gray-900">
+                <div class="flex justify-between items-center">
+                    <div class="flex-1 text-left">
+                        @auth
+                            <div style="font-size: 1.6rem; font-weight: bold;"> 
+                                {{ __('Selamat datang Admin, ') }}
+                                <span class="welcome-message text-uppercase">
+                                    {{ Auth::user()->name }}
+                                </span>
+                            </div>
+                        @else
+                            <div>{{ __("You're not logged in!") }}</div>
+                        @endauth
+                    </div>
+                    <div class="weather-location-container">
+                        <!-- Jam Realtime -->
+                        <div id="current-time" class="info-item">
+                            <i class="fa fa-clock"></i>
+                            <span id="time"></span>
                         </div>
-                    @else
-                        <div>{{ __("You're not logged in!") }}</div>
-                    @endauth
+                        <!-- Cuaca Terkini -->
+                        <div id="weather-info" class="info-item">
+                            <span id="weather-icon"></span>
+                            <span id="weather"></span>
+                        </div>
+                        <!-- Nama Lokasi -->
+                        <div id="location" class="info-item">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <span id="location-name"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,8 +100,16 @@
     <div class="overflow-x-auto mx-auto w-full max-w-2xl mt-4">
         <input type="text" id="search-tps" placeholder="Cari TPS..."
             class="border border-gray-300 rounded p-2 mb-4 w-full" oninput="searchTPS()" />
-        <div id="loading" class="text-center hidden">Sedang memuat...</div> <!-- Elemen loading -->
         <div class="overflow-x-auto mx-auto w-full max-w-2xl mt-4">
+            <label for="distance-filter" class="block mb-2">Pilih Jarak</label>
+            <select id="distance-filter" class="border border-gray-300 rounded p-2 mb-4 w-full">
+                <option value="0">Semua</option>
+                <option value="200">200 m</option>
+                <option value="500">500 m</option>
+                <option value="1000">1 km</option>
+                <option value="2000">2 km</option>
+            </select>
+            <div id="loading" class="text-center hidden">Sedang memuat...</div>
             <table class="min-w-full bg-white border">
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -311,7 +338,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Jika menggunakan Laravel
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     body: JSON.stringify({
                         phone: adminPhone
@@ -428,7 +455,7 @@
                     method: method,
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Token untuk perlindungan CSRF
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     body: JSON.stringify(requestData)
                 })
@@ -443,7 +470,7 @@
                     status,
                     body
                 }) => {
-                    if (status  >= 200 && status < 300 && body.success) {
+                    if (status >= 200 && status < 300 && body.success) {
                         // Jika sukses
                         if (editingId) {
                             // Perbarui data lokal TPS jika sedang dalam mode edit
@@ -480,5 +507,94 @@
         });
         renderTPSList();
         updateMarkers();
+        // Filter TPS berdasarkan jarak
+        function filterTPSByDistance() {
+            const selectedDistance = parseInt(document.getElementById('distance-filter')
+                .value); // Mendapatkan jarak yang dipilih
+            const userLocation = map.getCenter(); // Mengambil posisi pusat peta (bisa disesuaikan dengan lokasi pengguna)
+
+            // Menampilkan indikator loading (misalnya spinner)
+            document.getElementById('loading').style.display = 'block';
+
+            // Menghitung TPS yang sesuai dengan jarak yang dipilih
+            setTimeout(() => {
+                const filteredTps = originalTpsData.filter(tps => {
+                    const tpsLatLng = L.latLng(tps.lat, tps.lng); // Koordinat TPS
+                    const distance = userLocation.distanceTo(tpsLatLng); // Menghitung jarak
+
+                    // Jika jarak yang dipilih 0, tampilkan semua TPS. Jika tidak, tampilkan TPS yang dalam jangkauan jarak
+                    return selectedDistance === 0 || distance <= selectedDistance;
+                });
+
+                // Menampilkan TPS yang sudah difilter
+                renderTPSList(filteredTps);
+
+                // Menyembunyikan indikator loading setelah data ditampilkan
+                document.getElementById('loading').style.display = 'none';
+            }, 500);
+        }
+
+        // Menambahkan event listener untuk perubahan filter jarak
+        document.getElementById('distance-filter').addEventListener('change', filterTPSByDistance);
+        // Fungsi untuk update waktu real-time
+        function updateTime() {
+            const timeElement = document.getElementById('time');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Fungsi untuk mendapatkan cuaca berdasarkan lokasi pengguna
+        function getWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const apiKey = '344abe5a4f56636f35a541a3b0a74554';
+                    const weatherUrl =
+                        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+                    fetch(weatherUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            const weatherElement = document.getElementById('weather');
+                            const weatherIconElement = document.getElementById('weather-icon');
+                            const locationElement = document.getElementById(
+                                'location-name');
+                            const temperature = data.main.temp;
+                            const weatherDescription = data.weather[0].description;
+                            const weatherIcon = data.weather[0].icon;
+                            const locationName = data.name;
+
+                            // Menampilkan nama lokasi (kota)
+                            locationElement.textContent = `${locationName}`;
+
+                            // Menampilkan cuaca dan ikon
+                            weatherElement.textContent = `${temperature}°C, ${weatherDescription}`;
+                            weatherIconElement.innerHTML =
+                                `<img src="https://openweathermap.org/img/wn/${weatherIcon}.png" alt="${weatherDescription}" />`; // Menampilkan ikon cuaca
+                        })
+                        .catch(error => {
+                            console.error('Error fetching weather data:', error);
+                            document.getElementById('weather').textContent = 'Tidak dapat memuat cuaca';
+                        });
+                }, function(error) {
+                    console.error("Geolocation error:", error);
+                    document.getElementById('weather').textContent = 'Lokasi tidak ditemukan';
+                }, {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                });
+            } else {
+                console.error("Geolocation is not supported by this browser.");
+                document.getElementById('weather').textContent = 'Lokasi tidak ditemukan';
+            }
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+        getWeather();
     </script>
 </x-app-layout>

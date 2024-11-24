@@ -11,7 +11,7 @@
        
         <div class="registration form">
             <header class="header">Daftar Akun</header>
-            <img src="{{ asset('/image/iconauth.png') }}" alt="Register Image" class="login-image"> <!-- Gambar di atas -->
+            <img src="{{ asset('/imageAuth/reg_back.png') }}" alt="Register Image" class="login-image"> <!-- Gambar di atas -->
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf

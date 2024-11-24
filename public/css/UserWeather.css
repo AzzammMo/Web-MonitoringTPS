@@ -1,0 +1,32 @@
+/* Membuat container utama untuk cuaca dan lokasi berada di tengah */
+.weather-location-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Untuk meratakan elemen secara horizontal */
+    justify-content: center;  /* Untuk meratakan elemen secara vertikal */
+    margin-top: 20px; /* Memberikan jarak dari bagian atas jika perlu */
+}
+
+/* Mengatur setiap elemen (jam, cuaca, lokasi) */
+.info-item {
+    display: flex;
+    align-items: center; /* Menyusun ikon dan teks secara horizontal */
+    font-size: 1.2rem; /* Memperkecil ukuran font */
+    margin-bottom: 8px; /* Memberikan jarak antar elemen */
+}
+
+/* Menambahkan jarak antara ikon dan teks */
+.info-item i {
+    margin-right: 8px; /* Memberikan jarak antara ikon dan teks */
+}
+
+/* Mengatur ukuran ikon jika diperlukan */
+#weather-icon {
+    font-size: 1.8rem; /* Memperkecil ukuran ikon cuaca */
+    margin-right: 8px; /* Memberikan jarak antara ikon cuaca dan teks */
+}
+
+/* Mengatur ukuran ikon lainnya agar sesuai */
+.info-item i {
+    font-size: 1.5rem; /* Ukuran ikon standar */
+}

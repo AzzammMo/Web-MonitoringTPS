@@ -8,12 +8,11 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\TpsController;
 use App\Http\Controllers\SettingController;
 
-// Halaman utama (Welcome page)
 Route::get('/', function () {
     return view('home');
 });
 
-// Rute untuk dashboard user
+// Rute untuk dashboard user dan admin
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/user', [UserDashboardController::class, 'index'])->name('dashboard.user');
     Route::get('/dashboard/admin', [AdminDashboardController::class, 'index'])->name('dashboard.admin'); 
@@ -30,8 +29,6 @@ Route::delete('/tps/{id}', [TpsController::class, 'destroy'])->name('tps.destroy
 Route::post('/add-tps', [TpsController::class, 'store']);
 Route::delete('/delete-tps/{id}', [TpsController::class, 'destroy']);
 
-
-// Rute untuk tampilkan data TPS ke halaman home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Rute untuk dashboard, dilindungi oleh middleware 'auth'
