@@ -7,7 +7,6 @@ body {
 }
 
 .map-container {
-    
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -42,12 +41,13 @@ tr:hover {
 tr:last-child td {
     border-bottom: none;
 }
+
 .welcome-message {
     font-weight: bold;
     color: #38a169; /* Warna hijau */
 }
-/* app.css */
 
+/* app.css */
 #route-info {
     background-color: #fff;
     border: 1px solid #ccc;
@@ -66,6 +66,7 @@ tr:last-child td {
 #route-info p {
     margin: 5px 0;
 }
+
 .leaflet-control-container .leaflet-routing-container {
     display: none; /* Menyembunyikan kontrol rute */
 }
@@ -98,7 +99,6 @@ tr:last-child td {
     font-size: 16px;                /* Ukuran font untuk teks */
     margin-left: 10px;              /* Margin kiri untuk spasi antara ikon dan teks */
 }
-
 
 /* Gaya untuk form isian WhatsApp */
 #whatsapp-form {
@@ -136,6 +136,7 @@ tr:last-child td {
 #whatsapp-form button:hover {
     background-color: #20b958; /* Warna lebih gelap saat hover */
 }
+
 /* Gaya tombol dengan warna abu-abu dan teks putih */
 .view-button {
     background-color: #a0a0a0; /* Warna abu-abu */
@@ -152,4 +153,98 @@ tr:last-child td {
 /* Gaya tombol saat di-hover */
 .view-button:hover {
     background-color: #888888; /* Warna abu-abu yang lebih gelap saat hover */
+}
+
+/* Icon Informasi */
+.info-icon {
+    position: fixed;
+    bottom: 80px; /* Menempatkan ikon di atas tombol WhatsApp */
+    right: 20px;  /* Menempatkan ikon di pojok kanan bawah */
+    z-index: 1000;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.info-icon i {
+    font-size: 24px;
+    color: #007BFF;
+}
+
+/* Popup Poster */
+.info-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center vertically */
+    z-index: 1000;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Menambahkan agar konten terpusat secara vertikal */
+    width: 400px; /* Ukuran pop-up lebih besar */
+    height: auto;
+}
+
+.info-popup.hidden {
+    display: none;
+}
+
+/* Popup Poster */
+.info-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center vertically */
+    z-index: 1000;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically */
+    width: 400px; /* Larger pop-up size */
+    height: auto;
+}
+
+.info-popup.hidden {
+    display: none;
+}
+
+.poster-image {
+    width: 90%; /* Image width to 90% of the pop-up */
+    max-width: 350px; /* Maximum image width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px;
+    margin-bottom: 15px; /* Add spacing below the image */
+}
+
+/* Close icon without background */
+.close-popup {
+    position: absolute; /* Position the icon in the top-right corner */
+    top: 10px;
+    right: 10px;
+    font-size: 25px;  /* Icon size */
+    color: #007BFF;  /* Icon color (blue) */
+    cursor: pointer;
+    padding: 0; /* Remove padding */
+    box-shadow: none; /* Remove shadow */
+}
+
+.close-popup:hover {
+    color: #0056b3; /* Darker blue when hovered */
 }

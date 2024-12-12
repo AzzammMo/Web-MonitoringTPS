@@ -16,12 +16,13 @@ class CreateTpsTable extends Migration
         Schema::create('tps', function (Blueprint $table) {
             $table->id();
             $table->string('namaTps');
-            $table->decimal('lat', 10, 7); // Latitude
-            $table->decimal('lng', 10, 7); // Longitude
+            $table->decimal('lat', 10, 7);
+            $table->decimal('lng', 10, 7); 
             $table->text('alamat');
+            $table->enum('status', ['tersedia', 'penuh' , 'pemeliharaan'])->default('tersedia'); 
             $table->timestamps();
         });
-    }
+    }    
 
     /**
      * Reverse the migrations.

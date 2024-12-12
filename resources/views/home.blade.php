@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoring TPS</title>
+    <title>Monitoring TPA</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         body {
@@ -122,7 +122,7 @@
     <!-- Hero Section (Title & Subtitle) -->
     <div class="hero">
         <img src="{{ asset('image/image.png') }}" class="hero-image" alt="TPS Image">
-        <h1 class="title">MONITORING TEMPAT PEMBUANGAN SAMPAH</h1>
+        <h1 class="title">MONITORING TEMPAT PEMBUANGAN SAMPAH </h1>
         <h2 class="subtitle">Wilayah Surabaya</h2>
     </div>
 

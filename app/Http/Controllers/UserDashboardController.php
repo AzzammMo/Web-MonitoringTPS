@@ -11,8 +11,7 @@ class UserDashboardController extends Controller
     {
         // Ambil data TPS dari database
         $tps = Tps::all();
-
-        // Kembalikan view dengan data TPS
+        $tps = \App\Models\Tps::paginate(10); 
         return view('dashboard.user', compact('tps'));
     }
 }

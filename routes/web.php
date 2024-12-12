@@ -15,19 +15,26 @@ Route::get('/', function () {
 // Rute untuk dashboard user dan admin
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/user', [UserDashboardController::class, 'index'])->name('dashboard.user');
-    Route::get('/dashboard/admin', [AdminDashboardController::class, 'index'])->name('dashboard.admin'); 
+    Route::get('/dashboard/admin', [AdminDashboardController::class, 'index'])->name('dashboard.admin');
+    Route::post('/dashboard/tps', [TpsController::class, 'store'])->name('dashboard.store'); 
+    Route::put('/dashboard/update/{id}', [TpsController::class, 'update'])->name('dashboard.update');
+    Route::get('tps/{id}/edit', [TpsController::class, 'edit'])->name('dashboard.edit');
+    Route::delete('/dashboard/delete/{id}', [TpsController::class, 'destroy'])->name('dashboard.delete');
+
 });
 
 Route::post('/api/update-admin-phone', [SettingController::class, 'updateAdminPhone']);
 Route::get('/api/get-admin-phone', [SettingController::class, 'getAdminPhone']);
 Route::get('/settings/whatsapp', [SettingController::class, 'getWhatsApp']);
 Route::put('/tps/{id}', [TpsController::class, 'update'])->name('tps.update');
+Route::get('/tps/edit/{id}', [TpsController::class, 'edit'])->name('tps.edit');
 
-Route::post('/tps', [TpsController::class, 'store'])->name('tps.store');
-Route::delete('/tps/{id}', [TpsController::class, 'destroy'])->name('tps.destroy');
+// Route::post('/tps', [TpsController::class, 'store'])->name('tps.store');
+// Route::delete('/tps/{id}', [TpsController::class, 'destroy'])->name('tps.destroy');
+// Route::put('/tps/{id}/status', [TpsController::class, 'updateStatus']);
 
-Route::post('/add-tps', [TpsController::class, 'store']);
-Route::delete('/delete-tps/{id}', [TpsController::class, 'destroy']);
+// Route::post('/add-tps', [TpsController::class, 'store']);
+// Route::delete('/delete-tps/{id}', [TpsController::class, 'destroy']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
